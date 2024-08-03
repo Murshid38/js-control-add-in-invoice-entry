@@ -25,7 +25,7 @@ InvoiceEntryControlAddIn.innerHTML = `
         </select>
     </form>
 
-        <button id="submitButton">Submit</button>
+    <button type="button" id="submitButton">Submit</button>
 </body>
 
 </html>

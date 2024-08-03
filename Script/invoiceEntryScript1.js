@@ -1,5 +1,3 @@
-const submitButton = document.querySelector('button');
-
 function getSaleTypes(SaleType) {
     const saleTypeDropdown = document.getElementById('saleType');
 
@@ -10,14 +8,14 @@ function getSaleTypes(SaleType) {
     saleTypeDropdown.appendChild(newOption);
 }
 
-function getVendors(Vendor) {
-    const vendorDropDown = document.getElementById('broker');
+function getBroker(Vendor) {
+    const brokerDropDown = document.getElementById('broker');
 
     const newOption = document.createElement('option');
     newOption.value = Vendor;
     newOption.text = Vendor;
 
-    vendorDropDown.appendChild(newOption);
+    brokerDropDown.appendChild(newOption);
 }
 
 function getStores(Store) {
@@ -30,16 +28,19 @@ function getStores(Store) {
     storeDropDown.appendChild(newOption);
 }
 
-function returnBroker() {
-    const brokerDropDown = document.getElementById('broker');
-    const brokerName = brokerDropDown.value;
+function setInvoiceEntrySubmission() {
+    const submitButton = document.getElementById('submitButton');
+    // const saleTypeValue = saleTypeDropdown.value;
 
-    // raise the BrokerSelected event
-    Microsoft.Dynamics.NAV.InvokeExtensibilityMethod('BrokerSelected', [brokerName]);
+    // const broker = brokerDropDown.value.split(' - ');
+    // const brokerCode = broker[0];
+    // const brokerName = broker[1];
+
+    // const store = storeDropDown.value.split(' - ');
+    // const storeCode = store[0];
+    // const storeName = store[1];
+
+    submitButton.addEventListener("click", function () {
+        Microsoft.Dynamics.NAV.InvokeExtensibilityMethod('EntrySubmission', []);
+    })
 }
-
-function InsertDataToInvoiceEntry() {
-    console.log('Clicked Submit Button!!!');    
-}
-
-submitButton.addEventListener('click', InsertDataToInvoiceEntry);

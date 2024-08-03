@@ -21,10 +21,10 @@ page 50100 InvoiceEntry
                     GetValuesFromBC();
                 end;
 
-                // trigger BrokerSelected(BrokerSelected: Text)
-                // begin
-                //     Message('Broker selected: %1', BrokerSelected);
-                // end;
+                trigger EntrySubmission()
+                begin
+                    Message('Entry Submitted');
+                end;
             }
         }
     }
@@ -56,7 +56,7 @@ page 50100 InvoiceEntry
         SaleTypeList := InvoiceEntryHeader."Sale Type".Names();
 
         foreach Vendor in VendorList do
-            CurrPage.InvoiceEntryAddIn.getVendors(Vendor);
+            CurrPage.InvoiceEntryAddIn.getBroker(Vendor);
 
         foreach Store in StoreList do
             CurrPage.InvoiceEntryAddIn.getStores(Store);
@@ -64,6 +64,6 @@ page 50100 InvoiceEntry
         foreach SaleType in SaleTypeList do
             CurrPage.InvoiceEntryAddIn.getSaleTypes(SaleType);
 
-        CurrPage.InvoiceEntryAddIn.returnBroker();
+        CurrPage.InvoiceEntryAddIn.setInvoiceEntrySubmission();
     end;
 }

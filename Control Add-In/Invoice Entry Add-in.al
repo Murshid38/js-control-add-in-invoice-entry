@@ -21,10 +21,10 @@ controladdin InvoiceEntryAddIn
     //     'image2.png';
 
     event OnControlAddInReady()
-    event BrokerSelected(BrokerName: Text)
+    event EntrySubmission()
 
     procedure getSaleTypes(SaleType: Text)
-    procedure getVendors(Vendor: Text)
+    procedure getBroker(Vendor: Text)
     procedure getStores(Stores: Text)
-    procedure returnBroker();
+    procedure setInvoiceEntrySubmission()
 }
