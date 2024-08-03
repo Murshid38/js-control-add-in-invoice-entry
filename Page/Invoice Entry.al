@@ -21,9 +21,9 @@ page 50100 InvoiceEntry
                     GetValuesFromBC();
                 end;
 
-                trigger EntrySubmission()
+                trigger EntrySubmission(Parameter: JsonObject)
                 begin
-                    Message('Entry Submitted');
+                    Message('Entry Submitted: %1', Format(Parameter));
                 end;
             }
         }

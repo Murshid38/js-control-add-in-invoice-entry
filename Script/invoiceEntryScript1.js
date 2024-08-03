@@ -30,17 +30,33 @@ function getStores(Store) {
 
 function setInvoiceEntrySubmission() {
     const submitButton = document.getElementById('submitButton');
-    // const saleTypeValue = saleTypeDropdown.value;
 
-    // const broker = brokerDropDown.value.split(' - ');
-    // const brokerCode = broker[0];
-    // const brokerName = broker[1];
+    const saleTypeDropdown = document.getElementById('saleType');
+    const saleTypeValue = saleTypeDropdown.value;
+    console.log('Sale Type Value: ' + saleTypeValue);
 
-    // const store = storeDropDown.value.split(' - ');
-    // const storeCode = store[0];
-    // const storeName = store[1];
+    const brokerDropDown = document.getElementById('broker');
+    const broker = brokerDropDown.value.split(' - ');
+    const brokerCode = broker[0];
+    const brokerName = broker[1];
+
+    const storeDropDown = document.getElementById('store');
+    const store = storeDropDown.value.split(' - ');
+    const storeCode = store[0];
+    const storeName = store[1];
+
+    console.log('Submission button is set 1');
+
+    invoiceEntryJSONObj = {};
+    invoiceEntryJSONObj['saleTypeValue'] = saleTypeValue;
+    invoiceEntryJSONObj['brokerCode'] = brokerCode;
+    invoiceEntryJSONObj['brokerName'] = brokerName;
+    invoiceEntryJSONObj['storeCode'] = storeCode;
+    invoiceEntryJSONObj['storeName'] = storeName;
 
     submitButton.addEventListener("click", function () {
-        Microsoft.Dynamics.NAV.InvokeExtensibilityMethod('EntrySubmission', []);
+        Microsoft.Dynamics.NAV.InvokeExtensibilityMethod('EntrySubmission', [invoiceEntryJSONObj]);
     })
+
+    console.log('Submission button is set 2');
 }

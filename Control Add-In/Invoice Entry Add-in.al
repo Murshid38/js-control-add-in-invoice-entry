@@ -21,7 +21,7 @@ controladdin InvoiceEntryAddIn
     //     'image2.png';
 
     event OnControlAddInReady()
-    event EntrySubmission()
+    event EntrySubmission(Parameter: JsonObject)
 
     procedure getSaleTypes(SaleType: Text)
     procedure getBroker(Vendor: Text)
