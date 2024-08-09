@@ -27,7 +27,10 @@ page 50100 InvoiceEntry
                     InvoiceEntryHeader: Record "Invoice Entry Header";
                     JsonTools: Codeunit JsonTools;
                 begin
+                    InvoiceEntryHeader.Init();
                     InvoiceEntryHeader := JsonTools.JSONToRec(Parameter, InvoiceEntryHeader);
+                    InvoiceEntryHeader.EntryNo := GetLastInvoiceEntryNo() + 10000;
+                    InvoiceEntryHeader.Insert();
                     Message('%1', Format(InvoiceEntryHeader));
                 end;
             }
@@ -70,5 +73,16 @@ page 50100 InvoiceEntry
             CurrPage.InvoiceEntryAddIn.getSaleTypes(SaleType);
 
         CurrPage.InvoiceEntryAddIn.setInvoiceEntrySubmission();
+    end;
+
+    local procedure GetLastInvoiceEntryNo(): Integer
+    var
+        InvoiceEntryHeader: Record "Invoice Entry Header";
+    begin
+        InvoiceEntryHeader.SetCurrentKey(EntryNo);
+        if InvoiceEntryHeader.FindLast() then
+            exit(InvoiceEntryHeader.EntryNo)
+        else
+            exit(0);
     end;
 }

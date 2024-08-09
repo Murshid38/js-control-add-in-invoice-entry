@@ -67,8 +67,6 @@ codeunit 50100 JsonTools
                 FieldRf.Value := JsonKeyValue.AsInteger();
             FieldType::Date:
                 FieldRf.Value := JsonKeyValue.AsDate();
-            // FieldType::Option:
-            //     FieldRf.Value := JsonKeyValue.AsOption();
             FieldType::Option:
                 begin
                     OptionValueText := JsonKeyValue.AsText();
