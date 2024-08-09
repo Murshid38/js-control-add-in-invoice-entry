@@ -1,11 +1,12 @@
 page 50100 InvoiceEntry
 {
-    // PageType = NavigatePage;
-    PageType = ListPart;
+    PageType = NavigatePage;
+    // PageType = ListPart;
     ApplicationArea = All;
     UsageCategory = Administration;
     // SourceTable = "Invoice Entry Header";
     Caption = 'Invoice Entry';
+
 
     layout
     {
@@ -22,8 +23,12 @@ page 50100 InvoiceEntry
                 end;
 
                 trigger EntrySubmission(Parameter: JsonObject)
+                var
+                    InvoiceEntryHeader: Record "Invoice Entry Header";
+                    JsonTools: Codeunit JsonTools;
                 begin
-                    Message('Entry Submitted: %1', Format(Parameter));
+                    InvoiceEntryHeader := JsonTools.JSONToRec(Parameter, InvoiceEntryHeader);
+                    Message('%1', Format(InvoiceEntryHeader));
                 end;
             }
         }
@@ -53,7 +58,7 @@ page 50100 InvoiceEntry
                 StoreList.Add(StoreRec."Code" + ' - ' + StoreRec.Name);
             until StoreRec.Next() = 0;
 
-        SaleTypeList := InvoiceEntryHeader."Sale Type".Names();
+        SaleTypeList := InvoiceEntryHeader.SaleType.Names();
 
         foreach Vendor in VendorList do
             CurrPage.InvoiceEntryAddIn.getBroker(Vendor);

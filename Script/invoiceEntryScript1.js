@@ -29,7 +29,7 @@ function getStores(Store) {
 }
 
 function setInvoiceEntrySubmission() {
-    const submitButton = document.getElementById('submitButton');
+    const enterButton = document.getElementById('enterButton');
 
     const saleTypeDropdown = document.getElementById('saleType');
     const saleTypeValue = saleTypeDropdown.value;
@@ -48,13 +48,13 @@ function setInvoiceEntrySubmission() {
     console.log('Submission button is set 1');
 
     invoiceEntryJSONObj = {};
-    invoiceEntryJSONObj['saleTypeValue'] = saleTypeValue;
-    invoiceEntryJSONObj['brokerCode'] = brokerCode;
-    invoiceEntryJSONObj['brokerName'] = brokerName;
-    invoiceEntryJSONObj['storeCode'] = storeCode;
-    invoiceEntryJSONObj['storeName'] = storeName;
+    invoiceEntryJSONObj['SaleType'] = saleTypeValue;
+    invoiceEntryJSONObj['BrokerCode'] = brokerCode;
+    invoiceEntryJSONObj['BrokerName'] = brokerName;
+    invoiceEntryJSONObj['StoreCode'] = storeCode;
+    invoiceEntryJSONObj['StoreName'] = storeName;
 
-    submitButton.addEventListener("click", function () {
+    enterButton.addEventListener("click", function () {
         Microsoft.Dynamics.NAV.InvokeExtensibilityMethod('EntrySubmission', [invoiceEntryJSONObj]);
     })
 
