@@ -58,6 +58,9 @@ codeunit 50100 JsonTools
     var
         OptionValueText: Text;
         OptionIndex: Integer;
+        OptionCaptions: List of [Text];
+        OptionCaption: Text;
+        i: Integer;
     begin
         case FieldRf.Type() of
             FieldType::Code,
@@ -70,12 +73,21 @@ codeunit 50100 JsonTools
             FieldType::Option:
                 begin
                     OptionValueText := JsonKeyValue.AsText();
-                    OptionIndex := FieldRf.OptionCaption().IndexOf(OptionValueText);
+                    OptionCaptions := FieldRf.OptionCaption().Split(',');
 
-                    if OptionIndex = 0 then
+                    OptionIndex := -1;
+                    for i := 1 to OptionCaptions.Count() do begin
+                        OptionCaption := OptionCaptions.Get(i).Trim();
+                        if OptionCaption = OptionValueText then begin
+                            OptionIndex := i - 1; // Option indexes are 0-based
+                            break;
+                        end;
+                    end;
+
+                    if OptionIndex = -1 then
                         Error('Invalid option value: %1', OptionValueText);
 
-                    FieldRf.Value := OptionIndex - 1; // Option indexes are 0-based
+                    FieldRf.Value := OptionIndex;
                 end;
             else
                 Error('%1 is not a supported field type', FieldRf.Type());

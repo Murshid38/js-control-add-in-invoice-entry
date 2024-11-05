@@ -31,32 +31,28 @@ function getStores(Store) {
 function setInvoiceEntrySubmission() {
     const enterButton = document.getElementById('enterButton');
 
-    const saleTypeDropdown = document.getElementById('saleType');
-    const saleTypeValue = saleTypeDropdown.value;
-    console.log('Sale Type Value: ' + saleTypeValue);
-
-    const brokerDropDown = document.getElementById('broker');
-    const broker = brokerDropDown.value.split(' - ');
-    const brokerCode = broker[0];
-    const brokerName = broker[1];
-
-    const storeDropDown = document.getElementById('store');
-    const store = storeDropDown.value.split(' - ');
-    const storeCode = store[0];
-    const storeName = store[1];
-
-    console.log('Submission button is set 1');
-
-    invoiceEntryJSONObj = {};
-    invoiceEntryJSONObj['SaleType'] = saleTypeValue;
-    invoiceEntryJSONObj['BrokerCode'] = brokerCode;
-    invoiceEntryJSONObj['BrokerName'] = brokerName;
-    invoiceEntryJSONObj['StoreCode'] = storeCode;
-    invoiceEntryJSONObj['StoreName'] = storeName;
-
     enterButton.addEventListener("click", function () {
+        const saleTypeDropdown = document.getElementById('saleType');
+        const saleTypeValue = saleTypeDropdown.value;
+        console.log('Sale Type Value: ' + saleTypeValue);
+
+        const brokerDropDown = document.getElementById('broker');
+        const broker = brokerDropDown.value.split(' - ');
+        const brokerCode = broker[0];
+        const brokerName = broker[1];
+
+        const storeDropDown = document.getElementById('store');
+        const store = storeDropDown.value.split(' - ');
+        const storeCode = store[0];
+        const storeName = store[1];
+
+        invoiceEntryJSONObj = {};
+        invoiceEntryJSONObj['SaleType'] = saleTypeValue;
+        invoiceEntryJSONObj['BrokerCode'] = brokerCode;
+        invoiceEntryJSONObj['BrokerName'] = brokerName;
+        invoiceEntryJSONObj['StoreCode'] = storeCode;
+        invoiceEntryJSONObj['StoreName'] = storeName;
+
         Microsoft.Dynamics.NAV.InvokeExtensibilityMethod('EntrySubmission', [invoiceEntryJSONObj]);
     })
-
-    console.log('Submission button is set 2');
 }

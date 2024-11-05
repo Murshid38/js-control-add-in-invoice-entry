@@ -59,3 +59,5 @@ InvoiceEntryControlAddIn.innerHTML = `
 `;
 
 Microsoft.Dynamics.NAV.InvokeExtensibilityMethod('OnControlAddInReady', []);
+// we invoke the event here which was declared in control add-in object
+// and then the execution will go to the trigger which has the same name as the event
